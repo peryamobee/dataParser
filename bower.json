@@ -1,0 +1,26 @@
+{
+  "name": "dataParserFactory",
+  "version": "0.0.0",
+  "authors": [
+    "perymimon <pery.mimon@gmail.com>"
+  ],
+  "description": "like $parse dataParser help to parse data input in angular style ( data=foo in foos... )",
+  "keywords": [
+    "angular",
+    "factory",
+    "data",
+    "parser"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~3.9.3",
+    "angular": "~1.4.1"
+  }
+}

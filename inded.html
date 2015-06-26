@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="mainApp"   >
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>demo data parser</title>
+
+</head>
+<body ng-controller="mainController">
+
+<div ng-repeat="item in dataList()">{{item|json}}</div>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="dataParser.fctr.js"></script>
+
+<script>
+    angular.module('mainApp',['dataParser'])
+            .controller('mainController',mainController)
+    ;
+    var dataPattern = '(@model as)? (@label for)? (_instance_ in @source@) (branch by @branch)? (index by @index)?';
+
+    function mainController($scope, DataParser){
+        var parser =  DataParser.compile(dataPattern);
+
+        $scope.list = [{id:0,label:'first'},{id:1,label:'secound'}];
+
+        var dataExpresion = 'item.id as item.label for item in list';
+        $scope.dataList = parser(dataExpresion, $scope);
+
+    }
+</script>
+</body>
+</html>
