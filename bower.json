@@ -22,5 +22,7 @@
   "dependencies": {
     "lodash": "~3.9.3",
     "angular": "~1.4.1"
-  }
+  },
+  "homepage": "https://github.com/peryamobee/dataParser",
+  "main": "dataParser.js"
 }
