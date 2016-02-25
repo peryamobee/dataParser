@@ -1,15 +1,15 @@
 angular factory that help build directive with complex data like that :
  
  ```html
-  <collection data="item.value as item.first for item in outerData index by item.id"></collection>
+  <collection data="item.value as item.first for item in data index by item.id"></collection>
  ```
 
 with a breeze
 
 
-[]todo: better doc
+[x]todo: better doc
 
-first step is to define pattern of the data we expect. like with key we need to know about in the directive
+first step is to define pattern of the expected data. like which key we need to know about in the directive
 we do that by using a simple templete like this:
 
 ```js
