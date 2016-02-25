@@ -64,6 +64,6 @@ tpl.html
 used :
 
 ```html
-<collection data="item.value as item.first for item in data index by item.id"></collection>
+<collection data="item.value as item.label for item in data index by item.id"></collection>
 
 ```
