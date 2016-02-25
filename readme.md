@@ -9,20 +9,21 @@ with a breeze
 
 [x]todo: better doc
 
-first step is to define pattern of the expected data. like which key we need to know about in the directive
-we do that by using a simple templete like this:
+first step is to define pattern of the expected data. like which data key we need to know about.
+for the directive work fine. and which key is expected but it optional
+we do that by using a simple template like this:
 
 ```js
 var dataPattern = '(@model as)? (@label for)? (_instance_ in @source@) (index by @index)?';
 ```
 
-every group define a key that we are looking for and `@keyword` is the key that we got in the
-final object that hold the data that expressed in that position
+every group define a key that we are looking for. and `@keyword` is the key that hold the expressed data in that
+position.
 
-the use is very simple. if we take controller for the simplicity is look like this:
+the used of `DataParser` is very simple. if we take controller for the simplicity is look like this:
 
 ```js
-    module.controller('mainController',function ($scope, DataParser){
+    module.controller('controller',function ($scope, DataParser){
          $scope.data = [
             {id:1,label:'first'},
             {id:2,label:'second'}
@@ -35,7 +36,7 @@ the use is very simple. if we take controller for the simplicity is look like th
 
 ```
 
-next example is how build directive with that 
+next example is build directive with that 
 
 ```js
 
@@ -58,4 +59,11 @@ tpl.html
         <li><label>label:</label> {{item.label}} </li>
         <li><label>index:</label> {{item.index}} </li>
     </ul>
+```
+
+used :
+
+```html
+<collection data="item.value as item.first for item in data index by item.id"></collection>
+
 ```
