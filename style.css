@@ -1,0 +1,57 @@
+script:not([src]){
+    display: block;
+    white-space: pre;
+    border: 1px solid;
+    overflow: auto;
+    font-family: monospace;
+}
+
+script:not([src]):before{
+    content: 'Java Script';
+    display: block;
+    color: #5067a8;
+    font-family: monospace;
+    font-size: 10px;
+}
+script[type="text/ng-template"]:not([src]):before{
+    content: 'html template, href: 'attr(id) ;
+    color: #917d6f;
+}
+script[type="text/html"]:not([src]):before{
+    content: 'html';
+    color: #38826c;
+}
+
+
+body{
+    width: 800px;
+    background-color: #4a4a4a;
+    color: #c9c9c9;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h3{
+    margin: 2em 0;
+    padding: 1em 2em;
+    border-top:2px solid rgba(0, 0, 0, 0.31);
+    text-transform: capitalize;
+}
+
+.item-example {
+    line-height: 1.5em;
+    border-style: ridge;
+    border: 1px ridge #D3C5C5;
+    margin: 1em 0px;
+    padding: 0.3em;
+}
+
+/*collection*/
+collection ul{
+    list-style: hebrew;
+}
+collection li{
+    color: #d2d2d2;
+}
+collection label{
+    color: #b8cbff;
+}

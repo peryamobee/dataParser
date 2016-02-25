@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="mainApp"   >
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>demo data parser</title>
+
+</head>
+<body ng-controller="mainController as main">
+
+
+<link rel="stylesheet" href="style.css">
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="dataParser.js"></script>
+<h3>init</h3>
+
+<p>first step is to define the pattern of the data we expect. like which key we need to expose and if them mandatory for
+    our code or not</p>
+<script style="font-size:10px;">
+var dataPattern = '(@model as)? (@label for)? (_instance_ in @source@) (index by @index)?';
+</script>
+<p>call <k>DataParser</k> and use it to complie <k>dataPattern</k> to get the <k>parser</k></p>
+<script>
+    var module = angular.module('mainApp',['dataParser']);
+
+        module.controller('mainController',
+        function mainController($scope, DataParser){
+            this.parser =  DataParser.compile(dataPattern);
+        });
+
+
+</script>
+
+<div ng-controller="example1Ctrl_1 as example">
+    <h3>Example 1</h3>
+
+    <p>we have some data from outside and we need to explain it to our directive.</p>
+
+    <script>
+        module.controller('example1Ctrl_1', function ($scope) {
+            $scope.outerData = [
+                {id:1,label:'first'},
+                {id:2,label:'second'}
+            ];
+            var dataExpression = 'item.id as item.label for item in outerData';
+            this.outerData = $scope.main.parser(dataExpression, $scope);
+        });
+    </script>
+
+    <p>and we get the data in the structure we define in the pattern</p>
+    <div class="item-example" ng-repeat="item in example.outerData()">
+        {{item|json}}
+    </div>
+
+</div>
+
+<div ng-controller="example1Ctrl_2 as example">
+    <h3>Example 2</h3>
+    <p> we explain the parser another collection of outer data, in this case it is in different structure</p>
+    <script>
+        module.controller('example1Ctrl_2', function ($scope) {
+            $scope.outerData = [
+                {id:3, label:'first' },
+                {id:4, label:'second'}
+            ];
+            var dataExpression = 'item.id as item.label for item in outerData';
+            this.outerData = $scope.main.parser(dataExpression, $scope);
+        });
+    </script>
+
+    <p>and we get the data in the structure we define in the pattern</p>
+    <div class="item-example" ng-repeat="item in example.outerData()">
+        {{item|json}}
+    </div>
+</div>
+
+<div ng-controller="example1Ctrl_3 as example">
+    <h3>Example 3</h3>
+    <p> we can expertion one key as a calculation of something if we need</p>
+    <script>
+        module.controller('example1Ctrl_3', function ($scope) {
+            $scope.outerData = [
+                {id:3, first:'pery', last:'mimon'},
+                {id:4, first:'foo', last:'bar'}
+            ];
+            var dataExpression = 'item.id as item.first+" "+item.last for item in outerData';
+            this.outerData = $scope.main.parser(dataExpression, $scope);
+        });
+    </script>
+
+    <p>and we get the data calculated</p>
+    <div class="item-example" ng-repeat="item in example.outerData()">
+        {{item|json}}
+    </div>
+</div>
+
+<div ng-controller="example1Ctrl_4 as example">
+    <h3>Example 4</h3>
+    <p> help to build directives with complex data</p>
+    <script>
+        module.directive('collection', function (DataParser) {
+            var Parser = DataParser.compile(dataPattern);
+            return {
+                scope:true,
+                templateUrl:'tpl.html',
+                link: function (scope,element,attrs) {
+                    scope.parser = Parser(attrs.data, scope)
+                }
+            }
+        });
+
+        module.controller('example1Ctrl_4', function ($scope) {
+            $scope.outerData = [
+                {id:3, first:'pery', last:'mimon', value:'val_3'},
+                {id:4, first:'foo', last:'bar', value:'val_4'}
+            ];
+        });
+    </script>
+
+    <script type="text/ng-template" id="tpl.html">
+        <ul ng-repeat="item in parser()">
+            <li><label>model:</label> {{item.model}} </li>
+            <li><label>label:</label> {{item.label}} </li>
+            <li><label>index:</label> {{item.index}} </li>
+        </ul>
+    </script>
+
+    <script type="text/html">
+        <collection data="item.value as item.first for item in outerData index by item.id "></collection>
+    </script>
+
+    <collection data="item.value as item.first for item in outerData index by item.id"></collection>
+
+
+
+</div>
+
+<!--template for example directive-->
+
+
+</body>
+</html>
