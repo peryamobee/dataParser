@@ -1,7 +1,7 @@
 angular factory that help build directive with complex data like that :
  
  ```html
-  <collection data="item.value as item.first for item in data index by item.id"></collection>
+  <my-collection data="item.value as item.first for item in data index by item.id"></my-collection>
  ```
 
 with a breeze
