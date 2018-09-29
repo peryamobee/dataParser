@@ -55,4 +55,9 @@ If user not descibe that parts the `@key` appear in the generete object with val
 
 Every part that surrounded by brackets is a group that define a key  we looking for it. and the word that start with `@` in the group is the key that hold the expressed value from the user .
 
+#### `_instance_` 
+there is two specil key words one that surrounded with `_` that key hold (in the generated object) the orginal instance in the outer array. 
+
+#### `@source@` 
+the scound one reprecent the exparion that return the collection of all instances. 
 
