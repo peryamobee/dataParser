@@ -46,18 +46,20 @@ By write somthing like that
 
 ```
 ### How It Work 
-First step is to define pattern of the expected data. which data key we need to know about.
-Each word in dataPattern that start with `@` the parser mark as keyword for export object and for exparion that need
-to evalute in user input string . If some part of the pattern surrounded by brackets with a question mark at the end it 
-mean it not mandatory so user can describe them or not,  it expected but optional. 
-
-If user not descibe that parts the `@key` appear in the generete object with value `undefind`  
-
+First step is to define pattern for the expected data, which data key we need to know about.
 Every part that surrounded by brackets is a group that define a key  we looking for it. and the word that start with `@` in the group is the key that hold the expressed value from the user .
+   
+Each word in `dataPattern` that start with `@` marked as keyword for exported object and placeholder  exparion that will need
+to evalute as value for the keyword . If some part of the pattern will surrounded by brackets with a question mark at the end it 
+meen it expected but optional. If user not descibe that parts the value  will be `undefind`   
+
+There is two specil key words 
 
 #### `_instance_` 
-there is two specil key words one that surrounded with `_` that key hold (in the generated object) the orginal instance in the outer array. 
+surrounded with `_`,  that key will hold at the end the orginal instance of the object from the outer array. 
+
+the second 
 
 #### `@source@` 
-the scound one reprecent the exparion that return the collection of all instances. 
+reprecent expression that return the collection of all instances. 
 
